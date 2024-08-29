@@ -1,1 +1,16 @@
 <p>home works!</p>
+
+<div>
+  @if(placeList) {
+  <h2>places</h2>
+
+  <table>
+    <tr *ngFor="let place of placeList">
+      <td>
+        {{ place.name }}
+      </td>
+    </tr>
+  </table>
+
+  } @else { no places }
+</div>

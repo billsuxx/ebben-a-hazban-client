@@ -1,16 +1,18 @@
 <p>home works!</p>
 
 <div>
-  @if(placeList) {
   <h2>places</h2>
 
+  @if(isLoading$ | async; as isLoadnig) {
+  <div>Loading...</div>
+  } @if(places$ | async; as placesList) {
   <table>
-    <tr *ngFor="let place of placeList">
+    <tr *ngFor="let place of placesList">
       <td>
         {{ place.name }}
       </td>
     </tr>
   </table>
 
-  } @else { no places }
+  }
 </div>

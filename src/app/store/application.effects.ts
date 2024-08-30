@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { PlaceService } from '../services/place-service/place-service';
 import {
+  CreatePlaceAction,
+  createPlaceAction,
+  createPlaceErrorAction,
+  createPlaceSuccessAction,
   fetchPlacesAction,
   fetchPlacesErrorAction,
   fetchPlacesSuccessAction,
 } from './application.actions';
 import { catchError, map, mergeMap, of } from 'rxjs';
-import { Action } from '@ngrx/store';
 
 @Injectable()
 export class ApplicationEffects {
@@ -25,8 +28,19 @@ export class ApplicationEffects {
     )
   );
 
-  constructor(private actions$: Actions, private placeService: PlaceService) {
-    this.actions$ = actions$;
-    this.placeService = placeService;
-  }
+  createPlace$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(createPlaceAction),
+      mergeMap(({ place }: CreatePlaceAction) =>
+        this.placeService.create(place).pipe(
+          map((places) => createPlaceSuccessAction({ place })),
+          catchError((error) =>
+            of(createPlaceErrorAction({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
+
+  constructor(private actions$: Actions, private placeService: PlaceService) {}
 }

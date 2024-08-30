@@ -12,7 +12,7 @@ import { provideStore } from '@ngrx/store';
 
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
-import { placeReducer } from './store/application.reducer';
+import { placeListReducer, placeCreateReducer } from './store/application.reducer';
 import { PlaceService } from './services/place-service/place-service';
 
 export const appConfig: ApplicationConfig = {
@@ -21,7 +21,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore({
-      place: placeReducer,
+      list: placeListReducer,
+      create: placeCreateReducer
     }),
     provideEffects(ApplicationEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),

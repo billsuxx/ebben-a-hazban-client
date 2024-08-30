@@ -5,7 +5,16 @@
 
   @if(isLoading$ | async; as isLoadnig) {
   <div>Loading...</div>
-  } @if(places$ | async; as placesList) {
+  } 
+  @if(error$ | async; as errorText) {
+
+    <div class="alert alert-danger">
+      {{ errorText }}
+    </div>
+
+  }
+
+  @if(places$ | async; as placesList) {
   <table>
     <tr *ngFor="let place of placesList">
       <td>

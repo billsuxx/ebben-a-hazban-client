@@ -1,5 +1,5 @@
 import { ActionReducer, createReducer, on, State } from '@ngrx/store';
-import { ApplicationState } from '../interfaces/application.state.interface';
+import { ApplicationState, PlaceListState } from '../interfaces/application.state.interface';
 import {
   fetchPlacesAction,
   FetchPlacesErrorAction,
@@ -9,17 +9,17 @@ import {
 } from './application.actions';
 import { initialState } from './application.store';
 
-export const placeReducer = createReducer(
-  initialState,
+export const placeListReducer = createReducer(
+  initialState.list,
 
-  on(fetchPlacesAction, (state: ApplicationState) => ({
+  on(fetchPlacesAction, (state: PlaceListState) => ({
     ...state,
     loading: true,
   })),
 
   on(
     fetchPlacesSuccessAction,
-    (state: ApplicationState, { places }: FetchPlacesSuccessAction) => ({
+    (state: PlaceListState, { places }: FetchPlacesSuccessAction) => ({
       ...state,
       places,
       loading: false,
@@ -28,10 +28,15 @@ export const placeReducer = createReducer(
 
   on(
     fetchPlacesErrorAction,
-    (state: ApplicationState, { error }: FetchPlacesErrorAction) => ({
+    (state: PlaceListState, { error }: FetchPlacesErrorAction) => ({
       ...state,
       loading: false,
       error,
     })
   )
+);
+
+export const placeCreateReducer = createReducer(
+  initialState.create,
+
 );

@@ -1,30 +1,22 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ApplicationState, PlaceListState } from '../interfaces/application.state.interface';
+import {
+  ApplicationState,
+  PlaceListState,
+} from '../interfaces/application.state.interface';
 
-const selectPlaceState = createFeatureSelector<ApplicationState>('place');
-
-export const selectList = createSelector(
-  selectPlaceState,
-  (state: ApplicationState) => state.list
-)
-
-export const selectCreate = createSelector(
-  selectPlaceState,
-  (state: ApplicationState) => state.list
-)
+const selectListState = createFeatureSelector<PlaceListState>('list');
 
 export const selectPlaces = createSelector(
-  selectList,
+  selectListState,
   (state: PlaceListState) => state.places
 );
 
 export const selectPlacesIsLoading = createSelector(
-  selectList,
+  selectListState,
   (state: PlaceListState) => state.loading
 );
 
-
 export const selectPlacesError = createSelector(
-  selectList,
+  selectListState,
   (state: PlaceListState) => state.error
 );

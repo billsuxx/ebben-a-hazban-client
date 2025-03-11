@@ -1,5 +1,8 @@
 import { ActionReducer, createReducer, on, State } from '@ngrx/store';
-import { ApplicationState, PlaceListState } from '../interfaces/application.state.interface';
+import {
+  ApplicationState,
+  PlaceListState,
+} from '../interfaces/application.state.interface';
 import {
   fetchPlacesAction,
   FetchPlacesErrorAction,
@@ -9,8 +12,11 @@ import {
 } from './application.actions';
 import { initialState } from './application.store';
 
+const listInitState = initialState.list;
+const createInitState = initialState.create;
+
 export const placeListReducer = createReducer(
-  initialState.list,
+  listInitState,
 
   on(fetchPlacesAction, (state: PlaceListState) => ({
     ...state,
@@ -36,7 +42,4 @@ export const placeListReducer = createReducer(
   )
 );
 
-export const placeCreateReducer = createReducer(
-  initialState.create,
-
-);
+export const placeCreateReducer = createReducer(createInitState);

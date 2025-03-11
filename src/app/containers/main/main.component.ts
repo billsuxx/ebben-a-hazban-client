@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent {
   title = 'ebben-a-hazban-client';

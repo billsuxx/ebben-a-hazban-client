@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 
 import { fetchPlacesAction } from '../../store/application.actions';
@@ -8,20 +8,20 @@ import {
   selectPlacesError,
   selectPlaces,
 } from '../../store/applicatoin.selectors';
+import { ListComponent } from '../places/list/list.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, AsyncPipe],
+  imports: [AsyncPipe, ListComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-  places$ = this.store.select(selectPlaces);  
+  places$ = this.store.select(selectPlaces);
   isLoading$ = this.store.select(selectPlacesIsLoading);
   error$ = this.store.select(selectPlacesError);
-
 
   ngOnInit(): void {
     this.store.dispatch(fetchPlacesAction());

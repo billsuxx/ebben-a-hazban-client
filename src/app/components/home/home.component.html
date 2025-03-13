@@ -11,13 +11,8 @@
     {{ errorText }}
   </div>
   } @if(places$ | async; as placesList) {
-  <table>
-    <tr *ngFor="let place of placesList">
-      <td>
-        {{ place.name }}
-      </td>
-    </tr>
-  </table>
+
+  <place-list [places]="placesList" />
 
   } }
 </div>
